@@ -28,8 +28,10 @@ module mem_sim(
     reg power;
     reg write;
     reg read;
+    reg ir_en;
+    wire [7:0] ir_out;
     
-    Memory test_mem(power,write,read,add,data_in,data_out);
+    Memory test_mem(power,write,read,ir_en,add,data_in,data_out,ir_out);
     
     initial 
     begin
@@ -39,18 +41,21 @@ module mem_sim(
         read = 0;
         add = 11;
         data_in = 37;
+        read = 0;
+        ir_en = 0;
         
         #5 power = 0;
         #5 power = 1;
+        
+        read = 0;
         write = 1;
-         
         add = 11;
         data_in = 38;
+        ir_en = 0;
         
         #5 power = 0;
         #5 power = 1;
         read = 1;
-        
         #5 power = 0;
         #5 power = 1;
         read = 0;
@@ -60,5 +65,20 @@ module mem_sim(
         #5 power = 0;
         #5 power = 1;
         read = 1;
+        
+        #5 power = 0;
+        #5 power = 1;
+        
+        write = 1;
+        read = 0;
+        add = 12;
+        data_in = 7;
+        
+        #5 power = 0;
+        #5 power = 1;
+        
+        add = 11;
+        read = 1;
+        ir_en = 1;
     end
 endmodule
