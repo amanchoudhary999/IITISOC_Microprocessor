@@ -21,13 +21,13 @@
 
 
 module pc (offset,clk,jmp,pc);
-    input [3:0] offset;
+    input [8:0] offset;
     input clk,jmp;
-    output reg [3:0] pc= 0;
+    output reg [8:0] pc= 0;
   
     always @ (posedge clk)
         if (jmp)
-            pc <= pc + offset;
+            pc <= offset;
         else
-            pc <= pc + 1;
+            pc <= pc + 2;
 endmodule
